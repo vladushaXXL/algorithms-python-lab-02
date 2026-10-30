@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
 
         # Выбор частицы
         self.combo_box = QComboBox()
-        self.combo_box.addItem("-- Пользовательская частица --")
+        self.combo_box.addItem("Пользовательская частица")
         self.combo_box.addItems(REFERENCE_PARTICLES.keys())
         self.combo_box.currentTextChanged.connect(self.fill_reference_data)
         form_layout.addRow("Выбрать из справочника:", self.combo_box)
@@ -75,14 +75,14 @@ class MainWindow(QMainWindow):
             data = REFERENCE_PARTICLES[text]
             self.mass_input.setText(str(data["mass"]))
             self.charge_input.setText(str(data["charge"]))
-        elif text == "-- Пользовательская частица --":
+        elif text == "Пользовательская частица":
             self.mass_input.clear()
             self.charge_input.clear()
 
     def calculate(self):
         # Получаем данные из полей ввода
         name = self.combo_box.currentText()
-        if name == "-- Пользовательская частица --":
+        if name == "Пользовательская частица":
             name = "Пользовательская частица"
         
         mass_str = self.mass_input.text().strip().replace(',', '.')
@@ -124,7 +124,7 @@ class MainWindow(QMainWindow):
         self.current_results = (particle.name, spec_charge, compton_wl)
 
         # Вывод на экран
-        text = (f"--- Результаты для: {particle.name} ---\n\n"
+        text = (f"Результаты для: {particle.name} \n\n"
                 f"Масса: {particle.mass:.4e} кг\n"
                 f"Заряд: {particle.charge:.4e} Кл\n\n"
                 f"Удельный заряд (q/m):\n{spec_charge:.4e} Кл/кг\n\n"
